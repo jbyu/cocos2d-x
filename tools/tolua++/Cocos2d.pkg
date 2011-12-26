@@ -117,3 +117,5 @@ $pfile "CCMotionStreak.pkg"
 $pfile "CCCommon.pkg"
 
 $pfile "CCParticleSystem.pkg"
+$pfile "CCFileUtils.pkg"
+

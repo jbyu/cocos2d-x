@@ -1,0 +1,9 @@
+namespace cocos2d {
+
+class  CCFileUtils
+{
+    static const char* fullPathFromRelativePath(const char *pszRelativePath);
+};
+
+}
+
