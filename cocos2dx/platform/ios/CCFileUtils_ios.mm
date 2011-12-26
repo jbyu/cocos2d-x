@@ -236,10 +236,11 @@ static void static_addValueToCCDict(id key, id value, CCDictionary<std::string, 
 }
 
 namespace cocos2d {
-
+	static char g_szResourcePath[MAX_PATH];
     void CCFileUtils::setResourcePath(const char *pszResourcePath)
     {
-        assert(0);
+        //assert(0);
+		strcpy(g_szResourcePath,pszResourcePath);
     }
     
     int CCFileUtils::ccLoadFileIntoMemory(const char *filename, unsigned char **out)
@@ -279,7 +280,11 @@ namespace cocos2d {
 
     const char* CCFileUtils::fullPathFromRelativePath(const char *pszRelativePath)
     {
-        return static_fullPathFromRelativePath(pszRelativePath);
+        //return static_fullPathFromRelativePath(pszRelativePath);
+		char path[MAX_PATH];
+		strcpy(path,g_szResourcePath);
+		strcat(path,pszRelativePath);
+		return static_fullPathFromRelativePath(path);
     }
 
     const char *CCFileUtils::fullPathFromRelativeFile(const char *pszFilename, const char *pszRelativeFile)
