@@ -47,7 +47,7 @@ namespace   cocos2d {
 typedef struct _AsyncStruct
 {
 	std::string			filename;
-	SelectorProtocol	*target;
+	CCObject	*target;
 	SEL_CallFuncO		selector;
 } AsyncStruct;
 
@@ -188,7 +188,7 @@ char * CCTextureCache::description()
 	return ret;
 }
 
-void CCTextureCache::addImageAsync(const char *path, SelectorProtocol *target, SEL_CallFuncO selector)
+void CCTextureCache::addImageAsync(const char *path, CCObject *target, SEL_CallFuncO selector)
 {
 	CCAssert(path != NULL, "TextureCache: fileimage MUST not be NULL");	
 
@@ -268,7 +268,7 @@ void CCTextureCache::addImageAsyncCallBack(ccTime dt)
 		AsyncStruct *pAsyncStruct = pImageInfo->asyncStruct;
 		CCImage *pImage = pImageInfo->image;
 
-		SelectorProtocol *target = pAsyncStruct->target;
+		CCObject *target = pAsyncStruct->target;
 		SEL_CallFuncO selector = pAsyncStruct->selector;
 		const char* filename = pAsyncStruct->filename.c_str();
 
@@ -646,6 +646,7 @@ void VolatileTexture::addImageTexture(CCTexture2D *tt, const char* imageFileName
     vt->m_eCashedImageType = kImageFile;
     vt->m_strFileName = imageFileName;
     vt->m_FmtImage    = format;
+    vt->m_PixelFormat = tt->getPixelFormat();
 }
 
 void VolatileTexture::addDataTexture(CCTexture2D *tt, void* data, CCTexture2DPixelFormat pixelFormat, const CCSize& contentSize)
@@ -735,7 +736,10 @@ void VolatileTexture::reloadAllTextures()
 
 				if (image.initWithImageData((void*)pBuffer, nSize, vt->m_FmtImage))
 				{
+                    CCTexture2DPixelFormat oldPixelFormat = CCTexture2D::defaultAlphaPixelFormat();
+                    CCTexture2D::setDefaultAlphaPixelFormat(vt->m_PixelFormat);
 					vt->texture->initWithImage(&image);
+                    CCTexture2D::setDefaultAlphaPixelFormat(oldPixelFormat);
 				}
 			}
 			break;

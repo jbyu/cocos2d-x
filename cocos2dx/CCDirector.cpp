@@ -48,9 +48,9 @@ THE SOFTWARE.
 #include "CCAnimationCache.h"
 #include "CCTouch.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)
+//#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)
 #include "CCUserDefault.h"
-#endif
+//#endif
 
 #if CC_ENABLE_PROFILERS
 #include "support/CCProfiling.h"
@@ -569,7 +569,8 @@ void CCDirector::resetDirector()
 
 	stopAnimation();
 
-	CC_SAFE_RELEASE_NULL(m_pProjectionDelegate);
+    CCObject* pProjectionDelegate = (CCObject*)m_pProjectionDelegate;
+	CC_SAFE_RELEASE_NULL(pProjectionDelegate);
 
 	// purge bitmap cache
 	CCLabelBMFont::purgeCachedData();
@@ -609,7 +610,8 @@ void CCDirector::purgeDirector()
 	CC_SAFE_RELEASE_NULL(m_pFPSLabel);
 #endif
 
-		CC_SAFE_RELEASE_NULL(m_pProjectionDelegate);
+    CCObject* pProjectionDelegate = (CCObject*)m_pProjectionDelegate;
+    CC_SAFE_RELEASE_NULL(pProjectionDelegate);
 
 	// purge bitmap cache
 	CCLabelBMFont::purgeCachedData();
@@ -621,9 +623,9 @@ void CCDirector::purgeDirector()
 	CCScheduler::purgeSharedScheduler();
 	CCTextureCache::purgeSharedTextureCache();
 	
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)	
+//#if (CC_TARGET_PLATFORM != CC_PLATFORM_MARMALADE)	
 	CCUserDefault::purgeSharedUserDefault();
-#endif
+//#endif
 	// OpenGL view
 	m_pobOpenGLView->release();
 	m_pobOpenGLView = NULL;

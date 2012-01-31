@@ -942,7 +942,8 @@ void DemoParticleFromFile::onEnter()
 {
     ParticleDemo::onEnter();
 
-	setColor(ccBLACK);
+	//setColor(ccBLACK);
+	setColor( ccc3(255,255,128));
 	removeChild(m_background, true);
 	m_background = NULL;
 

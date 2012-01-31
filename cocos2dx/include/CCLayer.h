@@ -78,6 +78,9 @@ public:
 	*/
 	virtual void registerWithTouchDispatcher(void);
 
+	virtual void touchDelegateRetain();
+	virtual void touchDelegateRelease();
+
 	/** whether or not it will receive Touch events.
 	You can enable / disable touch events with this property.
 	Only the touches of this node will be affected. This "method" is not propagated to it's children.
@@ -182,7 +185,8 @@ public:
 	/** BlendFunction. Conforms to CCBlendProtocol protocol */
 	CC_PROPERTY(ccBlendFunc, m_tBlendFunc, BlendFunc)
 
-	virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
+	virtual void setIsOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
+    virtual bool getIsOpacityModifyRGB(void) { return false;}
     LAYER_NODE_FUNC(CCLayerColor);
     
 protected:
