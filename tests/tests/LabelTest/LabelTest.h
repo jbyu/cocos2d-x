@@ -178,6 +178,20 @@ public:
 	virtual std::string subtitle();
 };
 
+class LabelTTFChinese : public AtlasDemo
+{
+public:
+	LabelTTFChinese();
+	virtual std::string title();
+};
+
+class LabelBMFontChinese : public AtlasDemo
+{
+public:
+    LabelBMFontChinese();
+    virtual std::string title();
+};
+
 // we don't support linebreak mode
 
 #endif

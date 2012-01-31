@@ -11,28 +11,29 @@ if not exist "%cd%\create-android-project.bat" echo Error!!! You should run it u
 if not exist "%~dpn0.sh" echo Script "%~dpn0.sh" not found & pause & exit 3
 
 :: modify it to work under your environment	 
-set _CYGBIN=f:\cygwin\bin
+set _CYGBIN=d:\programe\cygwin\bin
 if not exist "%_CYGBIN%" echo Couldn't find Cygwin at "%_CYGBIN%" & pause & exit 4
 
 :: modify it to work under your environment
-set _ANDROIDTOOLS=d:\android-sdk\tools
+set _ANDROIDTOOLS=d:\programe\android\android-sdk\tools
 if not exist "%_ANDROIDTOOLS%" echo Couldn't find android sdk tools at "%_ANDROIDTOOLS%" & pause & exit 5
 
 :: modify it to work under your environment
-set _NDKROOT=e:\android-ndk-r5
+set _NDKROOT=d:\programe\android\ndk\android-ndk-r6b
 if not exist "%_NDKROOT%" echo Couldn't find ndk at "%_NDKROOT%" & pause & exit 6
 
 :: create android project
-set /P _PACKAGEPATH=Please enter your package path:
+set /P _PACKAGEPATH=Please enter your package path. For example: org.cocos2dx.example:
 set /P _PROJECTNAME=Please enter your project name:
+if exist "%CD%\%_PROJECTNAME%" echo "%_PROJECTNAME%" exists, please use another name & pause & exit 7
 echo "Now cocos2d-x suppurts Android 2.1-update1, 2.2, 2.3 & 3.0"
 echo "Other versions have not tested."
-call %_ANDROIDTOOLS%\android.bat list targets
+call "%_ANDROIDTOOLS%\android.bat" list targets
 set /P _TARGETID=Please input target id:
 set _PROJECTDIR=%CD%\%_PROJECTNAME%
 
 echo Create android project
-call %_ANDROIDTOOLS%\android.bat create project -n %_PROJECTNAME% -t %_TARGETID% -k %_PACKAGEPATH% -a %_PROJECTNAME% -p %_PROJECTDIR%
+call "%_ANDROIDTOOLS%\android.bat" create project -n %_PROJECTNAME% -t %_TARGETID% -k %_PACKAGEPATH% -a %_PROJECTNAME% -p %_PROJECTDIR%
 	 
 :: Resolve ___.sh to /cygdrive based *nix path and store in %_CYGSCRIPT%
 for /f "delims=" %%A in ('%_CYGBIN%\cygpath.exe "%~dpn0.sh"') do set _CYGSCRIPT=%%A

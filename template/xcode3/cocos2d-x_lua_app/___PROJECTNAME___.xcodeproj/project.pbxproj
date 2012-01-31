@@ -17,6 +17,7 @@
 		506EDB88102F4C4000A389B3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDB87102F4C4000A389B3 /* libz.dylib */; };
 		506EDBA5102F4C9F00A389B3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */; };
 		506EE1A91030508200A389B3 /* libcocos2d libraries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506EE05E10304ED200A389B3 /* libcocos2d libraries.a */; };
+		AD7C64A814751BA4008E5647 /* CCThread_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD7C64A714751BA4008E5647 /* CCThread_ios.mm */; };
 		BF126CE71373EE2800C4ABC5 /* CCUserDefault.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF126CE61373EE2800C4ABC5 /* CCUserDefault.cpp */; };
 		BF19164212E052E1007DCFF1 /* LICENSE.cocos2d-x in Resources */ = {isa = PBXBuildFile; fileRef = BF19164112E052E1007DCFF1 /* LICENSE.cocos2d-x */; };
 		BF193F3413600871002463D2 /* CCArray.h in Headers */ = {isa = PBXBuildFile; fileRef = BF193F3313600871002463D2 /* CCArray.h */; };
@@ -243,7 +244,6 @@
 		BF8360D21328687F00F3C033 /* ccTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E381328687E00F3C033 /* ccTypes.h */; };
 		BF8360D31328687F00F3C033 /* CCZone.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E391328687E00F3C033 /* CCZone.h */; };
 		BF8360D41328687F00F3C033 /* cocos2d.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E3A1328687E00F3C033 /* cocos2d.h */; };
-		BF8360D61328687F00F3C033 /* selector_protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E3C1328687E00F3C033 /* selector_protocol.h */; };
 		BF8360D71328687F00F3C033 /* CCKeypadDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF835E3E1328687E00F3C033 /* CCKeypadDelegate.cpp */; };
 		BF8360D81328687F00F3C033 /* CCKeypadDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF835E3F1328687E00F3C033 /* CCKeypadDispatcher.cpp */; };
 		BF8360D91328687F00F3C033 /* CCLabelAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF835E411328687E00F3C033 /* CCLabelAtlas.cpp */; };
@@ -274,7 +274,6 @@
 		BF83610A1328687F00F3C033 /* CCPlatformMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E781328687E00F3C033 /* CCPlatformMacros.h */; };
 		BF83610B1328687F00F3C033 /* CCStdC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF835E791328687E00F3C033 /* CCStdC.cpp */; };
 		BF83610C1328687F00F3C033 /* CCStdC.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E7A1328687E00F3C033 /* CCStdC.h */; };
-		BF83610D1328687F00F3C033 /* CCThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF835E7B1328687E00F3C033 /* CCThread.cpp */; };
 		BF83610E1328687F00F3C033 /* CCThread.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E7C1328687E00F3C033 /* CCThread.h */; };
 		BF8361101328687F00F3C033 /* AccelerometerDelegateWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = BF835E7F1328687E00F3C033 /* AccelerometerDelegateWrapper.h */; };
 		BF8361111328687F00F3C033 /* AccelerometerDelegateWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF835E801328687E00F3C033 /* AccelerometerDelegateWrapper.mm */; };
@@ -335,6 +334,8 @@
 		BF8362B21328687F00F3C033 /* CCTMXXMLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF83605E1328687F00F3C033 /* CCTMXXMLParser.cpp */; };
 		BF8362B31328687F00F3C033 /* CCTouchDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8360601328687F00F3C033 /* CCTouchDispatcher.cpp */; };
 		BF8362B41328687F00F3C033 /* CCTouchHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF8360611328687F00F3C033 /* CCTouchHandler.cpp */; };
+		BF87A2F51414D4DA0025E979 /* Cocos2dxLuaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF87A2F31414D4DA0025E979 /* Cocos2dxLuaLoader.cpp */; };
+		BF87A2F61414D4DA0025E979 /* Cocos2dxLuaLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = BF87A2F41414D4DA0025E979 /* Cocos2dxLuaLoader.h */; };
 		BF9935F21373ED1200197D1B /* CCUserDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9935F11373ED1200197D1B /* CCUserDefault.h */; };
 		BFA008A6134423F500289DC3 /* CCCommon_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA008A5134423F500289DC3 /* CCCommon_ios.mm */; };
 		BFA70A1E136AB06C00ABC725 /* CCIMEDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA70A1B136AB06C00ABC725 /* CCIMEDelegate.h */; };
@@ -381,6 +382,7 @@
 		506EDB87102F4C4000A389B3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		506EE05E10304ED200A389B3 /* libcocos2d libraries.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcocos2d libraries.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD7C64A714751BA4008E5647 /* CCThread_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCThread_ios.mm; sourceTree = "<group>"; };
 		BF126CE61373EE2800C4ABC5 /* CCUserDefault.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCUserDefault.cpp; sourceTree = "<group>"; };
 		BF19164112E052E1007DCFF1 /* LICENSE.cocos2d-x */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENSE.cocos2d-x"; sourceTree = "<group>"; };
 		BF193F3313600871002463D2 /* CCArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArray.h; sourceTree = "<group>"; };
@@ -607,7 +609,6 @@
 		BF835E381328687E00F3C033 /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
 		BF835E391328687E00F3C033 /* CCZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCZone.h; sourceTree = "<group>"; };
 		BF835E3A1328687E00F3C033 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
-		BF835E3C1328687E00F3C033 /* selector_protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = selector_protocol.h; sourceTree = "<group>"; };
 		BF835E3E1328687E00F3C033 /* CCKeypadDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCKeypadDelegate.cpp; sourceTree = "<group>"; };
 		BF835E3F1328687E00F3C033 /* CCKeypadDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCKeypadDispatcher.cpp; sourceTree = "<group>"; };
 		BF835E411328687E00F3C033 /* CCLabelAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLabelAtlas.cpp; sourceTree = "<group>"; };
@@ -638,7 +639,6 @@
 		BF835E781328687E00F3C033 /* CCPlatformMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPlatformMacros.h; sourceTree = "<group>"; };
 		BF835E791328687E00F3C033 /* CCStdC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCStdC.cpp; sourceTree = "<group>"; };
 		BF835E7A1328687E00F3C033 /* CCStdC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCStdC.h; sourceTree = "<group>"; };
-		BF835E7B1328687E00F3C033 /* CCThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCThread.cpp; sourceTree = "<group>"; };
 		BF835E7C1328687E00F3C033 /* CCThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCThread.h; sourceTree = "<group>"; };
 		BF835E7F1328687E00F3C033 /* AccelerometerDelegateWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerDelegateWrapper.h; sourceTree = "<group>"; };
 		BF835E801328687E00F3C033 /* AccelerometerDelegateWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccelerometerDelegateWrapper.mm; sourceTree = "<group>"; };
@@ -699,6 +699,8 @@
 		BF83605E1328687F00F3C033 /* CCTMXXMLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTMXXMLParser.cpp; sourceTree = "<group>"; };
 		BF8360601328687F00F3C033 /* CCTouchDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTouchDispatcher.cpp; sourceTree = "<group>"; };
 		BF8360611328687F00F3C033 /* CCTouchHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTouchHandler.cpp; sourceTree = "<group>"; };
+		BF87A2F31414D4DA0025E979 /* Cocos2dxLuaLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cocos2dxLuaLoader.cpp; sourceTree = "<group>"; };
+		BF87A2F41414D4DA0025E979 /* Cocos2dxLuaLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cocos2dxLuaLoader.h; sourceTree = "<group>"; };
 		BF9935F11373ED1200197D1B /* CCUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUserDefault.h; sourceTree = "<group>"; };
 		BFA008A5134423F500289DC3 /* CCCommon_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCCommon_ios.mm; sourceTree = "<group>"; };
 		BFA70A1B136AB06C00ABC725 /* CCIMEDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCIMEDelegate.h; sourceTree = "<group>"; };
@@ -911,6 +913,8 @@
 		BF22EDD413B4658B00E008B2 /* cocos2dx_support */ = {
 			isa = PBXGroup;
 			children = (
+				BF87A2F31414D4DA0025E979 /* Cocos2dxLuaLoader.cpp */,
+				BF87A2F41414D4DA0025E979 /* Cocos2dxLuaLoader.h */,
 				BF22EDD513B4658B00E008B2 /* LuaEngine.cpp */,
 				BF22EDD613B4658B00E008B2 /* LuaCocos2d.h */,
 				BF22EDD713B4658B00E008B2 /* LuaEngine.h */,
@@ -1194,7 +1198,6 @@
 				BF835E381328687E00F3C033 /* ccTypes.h */,
 				BF835E391328687E00F3C033 /* CCZone.h */,
 				BF835E3A1328687E00F3C033 /* cocos2d.h */,
-				BF835E3C1328687E00F3C033 /* selector_protocol.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -1281,7 +1284,6 @@
 				BF835E781328687E00F3C033 /* CCPlatformMacros.h */,
 				BF835E791328687E00F3C033 /* CCStdC.cpp */,
 				BF835E7A1328687E00F3C033 /* CCStdC.h */,
-				BF835E7B1328687E00F3C033 /* CCThread.cpp */,
 				BF835E7C1328687E00F3C033 /* CCThread.h */,
 				BF835E7E1328687E00F3C033 /* ios */,
 				BF835EA51328687E00F3C033 /* platform.cpp */,
@@ -1293,6 +1295,7 @@
 		BF835E7E1328687E00F3C033 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				AD7C64A714751BA4008E5647 /* CCThread_ios.mm */,
 				BF1E78EB13E2529700C2D68B /* FontLabel */,
 				BFA008A5134423F500289DC3 /* CCCommon_ios.mm */,
 				BF835E7F1328687E00F3C033 /* AccelerometerDelegateWrapper.h */,
@@ -1537,7 +1540,6 @@
 				BF8360D21328687F00F3C033 /* ccTypes.h in Headers */,
 				BF8360D31328687F00F3C033 /* CCZone.h in Headers */,
 				BF8360D41328687F00F3C033 /* cocos2d.h in Headers */,
-				BF8360D61328687F00F3C033 /* selector_protocol.h in Headers */,
 				BF8360F41328687F00F3C033 /* CCAccelerometer_platform.h in Headers */,
 				BF8360F51328687F00F3C033 /* CCApplication_platform.h in Headers */,
 				BF8360F61328687F00F3C033 /* CCArchOptimalParticleSystem.h in Headers */,
@@ -1618,6 +1620,7 @@
 				D4C3D24813F25D1100192C16 /* CCTexturePVR.h in Headers */,
 				D4C3D24913F25D1100192C16 /* CCTouchHandler.h in Headers */,
 				D4BA411F13FB8E03009E37C8 /* LuaSimpleAudioEngine.h in Headers */,
+				BF87A2F61414D4DA0025E979 /* Cocos2dxLuaLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1776,7 +1779,6 @@
 				BF8360F71328687F00F3C033 /* CCCommon.cpp in Sources */,
 				BF8360FC1328687F00F3C033 /* CCGL.cpp in Sources */,
 				BF83610B1328687F00F3C033 /* CCStdC.cpp in Sources */,
-				BF83610D1328687F00F3C033 /* CCThread.cpp in Sources */,
 				BF8361111328687F00F3C033 /* AccelerometerDelegateWrapper.mm in Sources */,
 				BF8361131328687F00F3C033 /* CCAccelerometer_ios.mm in Sources */,
 				BF8361151328687F00F3C033 /* CCApplication_ios.mm in Sources */,
@@ -1877,6 +1879,8 @@
 				BF1E790113E2529700C2D68B /* ZFont.m in Sources */,
 				D4C3D24B13F25D3100192C16 /* CCTexturePVR.cpp in Sources */,
 				D4BA411E13FB8E03009E37C8 /* LuaSimpleAudioEngine.cpp in Sources */,
+				BF87A2F51414D4DA0025E979 /* Cocos2dxLuaLoader.cpp in Sources */,
+				AD7C64A814751BA4008E5647 /* CCThread_ios.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -133,6 +133,12 @@
     <Filter Include="classes\tests\FontTest">
       <UniqueIdentifier>{f50ced88-8293-41ef-a4cf-8e6f12be7066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="classes\tests\CurrentLanguageTest">
+      <UniqueIdentifier>{178ed769-203d-47d0-92a4-de8668c4df58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="classes\tests\TextureCacheTest">
+      <UniqueIdentifier>{17b9b23c-1ef6-466e-a2ab-c558f4015698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -383,6 +389,12 @@
     </ClCompile>
     <ClCompile Include="..\tests\FontTest\FontTest.cpp">
       <Filter>classes\tests\FontTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\CurrentLanguageTest\CurrentLanguageTest.cpp">
+      <Filter>classes\tests\CurrentLanguageTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\TextureCacheTest\TextureCacheTest.cpp">
+      <Filter>classes\tests\TextureCacheTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -694,6 +706,12 @@
     </ClInclude>
     <ClInclude Include="..\tests\FontTest\FontTest.h">
       <Filter>classes\tests\FontTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tests\CurrentLanguageTest\CurrentLanguageTest.h">
+      <Filter>classes\tests\CurrentLanguageTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tests\TextureCacheTest\TextureCacheTest.h">
+      <Filter>classes\tests\TextureCacheTest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

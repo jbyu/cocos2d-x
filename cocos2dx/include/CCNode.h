@@ -31,8 +31,6 @@ THE SOFTWARE.
 #include "ccMacros.h"
 #include "CCAffineTransform.h"
 #include "CCArray.h"
-#include "selector_protocol.h"
-
 #include "CCGL.h"
 
 namespace   cocos2d {
@@ -103,7 +101,7 @@ namespace   cocos2d {
 	- Each node has a camera. By default it points to the center of the CCNode.
 	*/ 
 
-	class CC_DLL CCNode : public SelectorProtocol, public CCObject
+	class CC_DLL CCNode : public CCObject
 	{
 
 		// variable property
@@ -138,8 +136,8 @@ namespace   cocos2d {
 			CC_PROPERTY(float, m_fScaleY, ScaleY)
 
 			/** Position (x,y) of the node in OpenGL coordinates. (0,0) is the left-bottom corner. */
-			CC_PROPERTY(CCPoint, m_tPosition, Position)
-			CC_PROPERTY(CCPoint, m_tPositionInPixels, PositionInPixels)
+			CC_PROPERTY_PASS_BY_REF(CCPoint, m_tPosition, Position)
+			CC_PROPERTY_PASS_BY_REF(CCPoint, m_tPositionInPixels, PositionInPixels)
 
             /** The X skew angle of the node in degrees.
             This angle describes the shear distortion in the X direction.
@@ -174,26 +172,26 @@ namespace   cocos2d {
 			The default anchorPoint is (0.5,0.5), so it starts in the center of the node.
 			@since v0.8
 			*/
-			CC_PROPERTY(CCPoint, m_tAnchorPoint, AnchorPoint)
+			CC_PROPERTY_PASS_BY_REF(CCPoint, m_tAnchorPoint, AnchorPoint)
 
 			/** The anchorPoint in absolute pixels.
 			Since v0.8 you can only read it. If you wish to modify it, use anchorPoint instead
 			*/
-			CC_PROPERTY_READONLY(CCPoint, m_tAnchorPointInPixels, AnchorPointInPixels)
+			CC_PROPERTY_READONLY_PASS_BY_REF(CCPoint, m_tAnchorPointInPixels, AnchorPointInPixels)
 
 			/** The untransformed size of the node.
 			The contentSize remains the same no matter the node is scaled or rotated.
 			All nodes has a size. Layer and Scene has the same size of the screen.
 			@since v0.8
 			*/
-			CC_PROPERTY(CCSize, m_tContentSize, ContentSize)
+			CC_PROPERTY_PASS_BY_REF(CCSize, m_tContentSize, ContentSize)
 
 			/** The untransformed size of the node in Pixels
 			The contentSize remains the same no matter the node is scaled or rotated.
 			All nodes has a size. Layer and Scene has the same size of the screen.
 			@since v0.8
 			*/
-			CC_PROPERTY(CCSize, m_tContentSizeInPixels, ContentSizeInPixels)
+			CC_PROPERTY_PASS_BY_REF(CCSize, m_tContentSizeInPixels, ContentSizeInPixels)
 
 			/** whether or not the node is running */
 			CC_PROPERTY_READONLY(bool, m_bIsRunning, IsRunning)
@@ -246,13 +244,13 @@ namespace   cocos2d {
 
 		void arrayMakeObjectsPerformSelector(CCArray* pArray, callbackFunc func);
 
-		CCPoint convertToWindowSpace(CCPoint nodePoint);
+		CCPoint convertToWindowSpace(const CCPoint& nodePoint);
 
 	public:
 
-		CCNode();
+		CCNode(void);
 
-		virtual ~CCNode();
+		virtual ~CCNode(void);
 
 		char * description(void);
 
@@ -480,14 +478,6 @@ namespace   cocos2d {
 		*/
 		void pauseSchedulerAndActions(void);
 
-		// SelecterProtocol methods
-
-		virtual void selectorProtocolRetain(void);
-		virtual void selectorProtocolRelease(void);
-
-		virtual CCRGBAProtocol* convertToRGBAProtocol(void) { return NULL; }
-		virtual CCLabelProtocol* convertToLabelProtocol(void) { return NULL; }
-
 		// transformation methods
 
 		/** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
@@ -515,21 +505,21 @@ namespace   cocos2d {
 		/** Converts a Point to node (local) space coordinates. The result is in Points.
 		@since v0.7.1
 		*/
-		CCPoint convertToNodeSpace(CCPoint worldPoint);
+		CCPoint convertToNodeSpace(const CCPoint& worldPoint);
 		/** Converts a Point to world space coordinates. The result is in Points.
 		@since v0.7.1
 		*/
-		CCPoint convertToWorldSpace(CCPoint nodePoint);
+		CCPoint convertToWorldSpace(const CCPoint& nodePoint);
 		/** Converts a Point to node (local) space coordinates. The result is in Points.
 		treating the returned/received node point as anchor relative.
 		@since v0.7.1
 		*/
-		CCPoint convertToNodeSpaceAR(CCPoint worldPoint);
+		CCPoint convertToNodeSpaceAR(const CCPoint& worldPoint);
 		/** Converts a local Point to world space coordinates.The result is in Points.
 		treating the returned/received node point as anchor relative.
 		@since v0.7.1
 		*/
-		CCPoint convertToWorldSpaceAR(CCPoint nodePoint);
+		CCPoint convertToWorldSpaceAR(const CCPoint& nodePoint);
 
 		/** convenience methods which take a CCTouch instead of CCPoint
 		@since v0.7.1

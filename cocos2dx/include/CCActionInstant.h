@@ -29,7 +29,6 @@ THE SOFTWARE.
 
 #include <string>
 #include "CCAction.h"
-#include "selector_protocol.h"
 
 namespace cocos2d {
 
@@ -61,11 +60,14 @@ namespace cocos2d {
 		//super methods
 		virtual void startWithTarget(CCNode *pTarget);
 		virtual CCFiniteTimeAction * reverse(void);
+		virtual CCObject* copyWithZone(CCZone *pZone);
 	public:
 		//override static method
 		/** Allocates and initializes the action */
 		static CCShow * action();
 	};
+
+
 
 	/** 
 	@brief Hide the node
@@ -78,6 +80,7 @@ namespace cocos2d {
 		//super methods
 		virtual void startWithTarget(CCNode *pTarget);
 		virtual CCFiniteTimeAction * reverse(void);
+		virtual CCObject* copyWithZone(CCZone *pZone);
 	public:
 		//override static method
 		/** Allocates and initializes the action */
@@ -157,9 +160,9 @@ namespace cocos2d {
 		CCPlace(){}
 		virtual ~CCPlace(){}
 		/** creates a Place action with a position */
-		static CCPlace * actionWithPosition(CCPoint pos);
+		static CCPlace * actionWithPosition(const CCPoint& pos);
 		/** Initializes a Place action with a position */
-		bool initWithPosition(CCPoint pos);
+		bool initWithPosition(const CCPoint& pos);
 		//super methods
 		virtual void startWithTarget(CCNode *pTarget);
 		virtual CCObject* copyWithZone(CCZone *pZone);
@@ -174,63 +177,64 @@ namespace cocos2d {
 	public:
 		CCCallFunc()
             : m_pSelectorTarget(NULL)
-            , m_pCallFunc(NULL)
 			, m_scriptFuncName("")
+            , m_pCallFunc(NULL)
+
         {
 		}
 		virtual ~CCCallFunc()
 		{
 			if (m_pSelectorTarget)
 			{
-				m_pSelectorTarget->selectorProtocolRelease();
+				dynamic_cast<CCObject*>(m_pSelectorTarget)->release();
 			}
 		}
 		/** creates the action with the callback 
 
-		typedef void (SelectorProtocol::*SEL_CallFunc)();
+		typedef void (CCObject::*SEL_CallFunc)();
 		*/
-		static CCCallFunc * actionWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFunc selector);
+		static CCCallFunc * actionWithTarget(CCObject* pSelectorTarget, SEL_CallFunc selector);
 		static CCCallFunc* actionWithScriptFuncName(const char* pszFuncName);
 		/** initializes the action with the callback 
 		
-		typedef void (SelectorProtocol::*SEL_CallFunc)();
+		typedef void (CCObject::*SEL_CallFunc)();
 		*/
-		virtual bool initWithTarget(SelectorProtocol* pSelectorTarget);
+		virtual bool initWithTarget(CCObject* pSelectorTarget);
 		virtual bool initWithScriptFuncName(const char* pszFuncName);
 		/** executes the callback */
 		virtual void execute();
 		//super methods
 		virtual void startWithTarget(CCNode *pTarget);
-		CCObject * copyWithZone(cocos2d::CCZone *pZone);
+		CCObject * copyWithZone(CCZone *pZone);
 
 		void registerScriptFunction(const char* pszFunctionName);
 
-		inline SelectorProtocol* getTargetCallback()
+		inline CCObject* getTargetCallback()
 		{
 			return m_pSelectorTarget;
 		}
 
-		inline void setTargetCallback(SelectorProtocol* pSel)
+		inline void setTargetCallback(CCObject* pSel)
 		{
 			if (pSel != m_pSelectorTarget)
 			{
 				if (m_pSelectorTarget)
 				{
-					m_pSelectorTarget->selectorProtocolRelease();
+					m_pSelectorTarget->release();
 				}
 				
 				m_pSelectorTarget = pSel;
 
 				if (m_pSelectorTarget)
 				{
-					m_pSelectorTarget->selectorProtocolRetain();
+					m_pSelectorTarget->retain();
 				}				
 			}
 		}
 
 	protected:
 		/** Target that will be called */
-		SelectorProtocol*   m_pSelectorTarget;
+		CCObject*   m_pSelectorTarget;
 		/** the script function name to call back */
 		std::string         m_scriptFuncName;
 
@@ -254,15 +258,15 @@ namespace cocos2d {
 		virtual ~CCCallFuncN(){}
 		/** creates the action with the callback 
 
-		typedef void (SelectorProtocol::*SEL_CallFuncN)(CCNode*);
+		typedef void (CCObject::*SEL_CallFuncN)(CCNode*);
 		*/
-		static CCCallFuncN * actionWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncN selector);
+		static CCCallFuncN * actionWithTarget(CCObject* pSelectorTarget, SEL_CallFuncN selector);
 		static CCCallFuncN* actionWithScriptFuncName(const char* pszFuncName);
 		/** initializes the action with the callback 
 
-		typedef void (SelectorProtocol::*SEL_CallFuncN)(CCNode*);
+		typedef void (CCObject::*SEL_CallFuncN)(CCNode*);
 		*/
-		virtual bool initWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncN selector);
+		virtual bool initWithTarget(CCObject* pSelectorTarget, SEL_CallFuncN selector);
 		// super methods
 		virtual CCObject* copyWithZone(CCZone *pZone);
 		virtual void execute();
@@ -278,10 +282,10 @@ namespace cocos2d {
 	public:
 
 		/** creates the action with the callback and the data to pass as an argument */
-		static CCCallFuncND * actionWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncND selector, void* d);
+		static CCCallFuncND * actionWithTarget(CCObject* pSelectorTarget, SEL_CallFuncND selector, void* d);
 		static CCCallFuncND* actionWithScriptFuncName(const char* pszFuncName, void *d);
 		/** initializes the action with the callback and the data to pass as an argument */
-		virtual bool initWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncND selector, void* d);
+		virtual bool initWithTarget(CCObject* pSelectorTarget, SEL_CallFuncND selector, void* d);
 		// super methods
 		virtual CCObject* copyWithZone(CCZone *pZone);
 		virtual void execute();
@@ -303,15 +307,15 @@ namespace cocos2d {
         virtual ~CCCallFuncO();
         /** creates the action with the callback 
 
-        typedef void (SelectorProtocol::*SEL_CallFuncO)(CCObject*);
+        typedef void (CCObject::*SEL_CallFuncO)(CCObject*);
         */
-        static CCCallFuncO * actionWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncO selector, CCObject* pObject);
+        static CCCallFuncO * actionWithTarget(CCObject* pSelectorTarget, SEL_CallFuncO selector, CCObject* pObject);
 		static CCCallFuncO* actionWithScriptFuncName(const char* pszFuncName);
         /** initializes the action with the callback 
 
-        typedef void (SelectorProtocol::*SEL_CallFuncO)(CCObject*);
+        typedef void (CCObject::*SEL_CallFuncO)(CCObject*);
         */
-        virtual bool initWithTarget(SelectorProtocol* pSelectorTarget, SEL_CallFuncO selector, CCObject* pObject);
+        virtual bool initWithTarget(CCObject* pSelectorTarget, SEL_CallFuncO selector, CCObject* pObject);
         // super methods
         virtual CCObject* copyWithZone(CCZone *pZone);
         virtual void execute();

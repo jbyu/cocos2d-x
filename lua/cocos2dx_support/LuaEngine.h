@@ -30,7 +30,7 @@ THE SOFTWARE.
 class LuaEngine : public cocos2d::CCScriptEngineProtocol
 {
 public:
-	virtual	~LuaEngine();
+	virtual ~LuaEngine();
 
 	// functions for excute touch event
 	virtual bool executeTouchEvent(const char *pszFuncName, cocos2d::CCTouch *pTouch);

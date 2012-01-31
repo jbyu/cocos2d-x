@@ -1,9 +1,9 @@
 # set params
-ANDROID_NDK_ROOT=__ndkroot__
+NDK_ROOT=__ndkroot__
 COCOS2DX_ROOT=__cocos2dxroot__
 GAME_ROOT=$COCOS2DX_ROOT/__projectname__
 GAME_ANDROID_ROOT=$GAME_ROOT/android
-RESOURCE_ROOT=$GAME_ROOT/Resource
+RESOURCE_ROOT=$GAME_ROOT/Resources
 
 # make sure assets is exist
 if [ -d $GAME_ANDROID_ROOT/assets ]; then
@@ -25,5 +25,5 @@ do
 done
 
 # build
-$ANDROID_NDK_ROOT/ndk-build -C $GAME_ANDROID_ROOT $*
+$NDK_ROOT/ndk-build -C $GAME_ANDROID_ROOT $*
 

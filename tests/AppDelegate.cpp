@@ -9,12 +9,11 @@ using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()
 {
-
 }
 
 AppDelegate::~AppDelegate()
 {
-    SimpleAudioEngine::end();
+//    SimpleAudioEngine::end();
 }
 
 bool AppDelegate::initInstance()
@@ -59,9 +58,37 @@ bool AppDelegate::initInstance()
 
 #endif
 	
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
 		CCDirector::sharedDirector()->setDeviceOrientation(CCDeviceOrientationLandscapeLeft);
 #endif
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+
+		// Initialize OpenGLView instance, that release by CCDirector when application terminate.
+		// The HelloWorld is designed as HVGA.
+		CCEGLView * pMainWnd = new CCEGLView();
+		CC_BREAK_IF(! pMainWnd
+				|| ! pMainWnd->Create("cocos2d: tests", 480, 320, 480, 320));
+
+		//set the base resource folder pay attention to add "/"
+		CCFileUtils::setResourcePath("../Res/");
+
+#endif  // CC_PLATFORM_LINUX
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_BADA)
+
+		CCEGLView * pMainWnd = new CCEGLView();
+		CC_BREAK_IF(! pMainWnd|| ! pMainWnd->Create(this, 480, 320));
+		pMainWnd->setDeviceOrientation(Osp::Ui::ORIENTATION_LANDSCAPE);
+		CCFileUtils::setResourcePath("/Res/");
+
+#endif  // CC_PLATFORM_BADA
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
+		CCEGLView * pMainWnd = new CCEGLView();
+		CC_BREAK_IF(! pMainWnd|| ! pMainWnd->Create(480, 320));
+		CCFileUtils::setResourcePath("app/native/Resource");
+#endif // CC_PLATFORM_QNX
 
         bRet = true;
     } while (0);
@@ -101,12 +128,14 @@ bool AppDelegate::applicationDidFinishLaunching()
 void AppDelegate::applicationDidEnterBackground()
 {
     CCDirector::sharedDirector()->pause();
-    SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();   
+    SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+	SimpleAudioEngine::sharedEngine()->pauseAllEffects();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground()
 {
     CCDirector::sharedDirector()->resume();
-    SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();   
+    SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	SimpleAudioEngine::sharedEngine()->resumeAllEffects();
 }

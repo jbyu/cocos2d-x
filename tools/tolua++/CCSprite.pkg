@@ -1,7 +1,6 @@
+#define CCSpriteIndexNotInitialized 0xffffffff
 
 namespace   cocos2d {
-
-#define CCSpriteIndexNotInitialized 0xffffffff
 
 typedef enum {
 	//! Translate with it's parent
@@ -50,8 +49,8 @@ class  CCSprite : public CCNode, public CCTextureProtocol, public CCRGBAProtocol
 	CCSpriteBatchNode* getSpriteBatchNode(void);
 	void setSpriteBatchNode(CCSpriteBatchNode *pobSpriteBatchNode);
 
-	ccHonorParentTransform getHornorParentTransform(void);
-	void setHornorParentTransform(ccHonorParentTransform eHonorParentTransform);
+	ccHonorParentTransform getHonorParentTransform(void);
+	void setHonorParentTransform(ccHonorParentTransform eHonorParentTransform);
 
 	CCPoint getOffsetPositionInPixels(void);
 
@@ -120,7 +119,6 @@ class  CCSprite : public CCNode, public CCTextureProtocol, public CCRGBAProtocol
 	void setIsOpacityModifyRGB(bool bValue);
 	bool getIsOpacityModifyRGB(void);
 
-	CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol *)this; }
    void setTexture(CCTexture2D *texture);
 	CCTexture2D* getTexture(void);
 

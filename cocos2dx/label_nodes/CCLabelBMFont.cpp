@@ -102,14 +102,24 @@ namespace cocos2d{
 	}
 	bool CCBMFontConfiguration::initWithFNTfile(const char *FNTfile)
 	{
-		assert(FNTfile != NULL && strlen(FNTfile)!=0);
+		CCAssert(FNTfile != NULL && strlen(FNTfile)!=0, "");
 		m_pKerningDictionary = NULL;
 		this->parseConfigFile(FNTfile);
 		return true;
 	}
+
+    CCBMFontConfiguration::CCBMFontConfiguration()
+        : m_pBitmapFontArray(new std::map<unsigned int, ccBMFontDef>)
+        , m_uCommonHeight(0)
+        , m_pKerningDictionary(NULL)
+    {
+ 
+    }
+
 	CCBMFontConfiguration::~CCBMFontConfiguration()
 	{
 		CCLOGINFO( "cocos2d: deallocing CCBMFontConfiguration" );
+        CC_SAFE_DELETE(m_pBitmapFontArray);
 		this->purgeKerningDictionary();
 		m_sAtlasName.clear();
 	}
@@ -147,7 +157,8 @@ namespace cocos2d{
         // parse spacing / padding
         std::string line;
         std::string strLeft(pBuffer, nBufSize);
-        while (strLeft.length() > 0)        {
+        while (strLeft.length() > 0)
+        {
             int pos = strLeft.find('\n');
 
             if (pos != (int)std::string::npos)
@@ -190,7 +201,7 @@ namespace cocos2d{
                 this->parseCharacterDefinition(line, &characterDefinition);
 
                 // Add the CharDef returned to the charArray
-                m_pBitmapFontArray[ characterDefinition.charID ] = characterDefinition;
+                (*m_pBitmapFontArray)[ characterDefinition.charID ] = characterDefinition;
             }
             else if(line.substr(0,strlen("kernings count")) == "kernings count")
             {
@@ -278,7 +289,7 @@ namespace cocos2d{
 		int index2 = line.find(' ', index);
 		std::string value = line.substr(index, index2-index);
 		sscanf(value.c_str(), "id=%u", &characterDefinition->charID);
-		CCAssert(characterDefinition->charID < kCCBMFontMaxChars, "BitmpaFontAtlas: CharID bigger than supported");
+
 		// Character x
 		index = line.find("x=");
 		index2 = line.find(' ', index);
@@ -394,7 +405,7 @@ namespace cocos2d{
 
 	bool CCLabelBMFont::initWithString(const char *theString, const char *fntFile)
 	{	
-		assert(theString != NULL);
+		CCAssert(theString != NULL, "");
 		CC_SAFE_RELEASE(m_pConfiguration);// allow re-init
 		m_pConfiguration = FNTConfigLoadFile(fntFile);
 		m_pConfiguration->retain();
@@ -432,6 +443,183 @@ namespace cocos2d{
 		}
 		return ret;
 	}
+
+    static int cc_wcslen(const unsigned short* str)
+    {
+        int i=0;
+        while(*str++) i++;
+        return i;
+    }
+
+    /* Code from GLIB gutf8.c starts here. */
+
+    #define UTF8_COMPUTE(Char, Mask, Len)		\
+      if (Char < 128)				\
+        {						\
+          Len = 1;					\
+          Mask = 0x7f;				\
+        }						\
+      else if ((Char & 0xe0) == 0xc0)		\
+        {						\
+          Len = 2;					\
+          Mask = 0x1f;				\
+        }						\
+      else if ((Char & 0xf0) == 0xe0)		\
+        {						\
+          Len = 3;					\
+          Mask = 0x0f;				\
+        }						\
+      else if ((Char & 0xf8) == 0xf0)		\
+        {						\
+          Len = 4;					\
+          Mask = 0x07;				\
+        }						\
+      else if ((Char & 0xfc) == 0xf8)		\
+        {						\
+          Len = 5;					\
+          Mask = 0x03;				\
+        }						\
+      else if ((Char & 0xfe) == 0xfc)		\
+        {						\
+          Len = 6;					\
+          Mask = 0x01;				\
+        }						\
+      else						\
+        Len = -1;
+
+    #define UTF8_LENGTH(Char)			\
+      ((Char) < 0x80 ? 1 :				\
+       ((Char) < 0x800 ? 2 :			\
+        ((Char) < 0x10000 ? 3 :			\
+         ((Char) < 0x200000 ? 4 :			\
+          ((Char) < 0x4000000 ? 5 : 6)))))
+
+
+    #define UTF8_GET(Result, Chars, Count, Mask, Len)	\
+      (Result) = (Chars)[0] & (Mask);			\
+      for ((Count) = 1; (Count) < (Len); ++(Count))		\
+        {							\
+          if (((Chars)[(Count)] & 0xc0) != 0x80)		\
+	    {						\
+	      (Result) = -1;				\
+	      break;					\
+	    }						\
+          (Result) <<= 6;					\
+          (Result) |= ((Chars)[(Count)] & 0x3f);		\
+        }
+
+    #define UNICODE_VALID(Char)			\
+      ((Char) < 0x110000 &&				\
+       (((Char) & 0xFFFFF800) != 0xD800) &&		\
+       ((Char) < 0xFDD0 || (Char) > 0xFDEF) &&	\
+       ((Char) & 0xFFFE) != 0xFFFE)
+
+
+    static const char utf8_skip_data[256] = {
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      2, 2, 2, 2, 2, 2, 2,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5,
+      5, 5, 5, 6, 6, 1, 1
+    };
+
+    static const char *const g_utf8_skip = utf8_skip_data;
+
+    #define cc_utf8_next_char(p) (char *)((p) + g_utf8_skip[*(unsigned char *)(p)])
+
+    /*
+     * g_utf8_strlen:
+     * @p: pointer to the start of a UTF-8 encoded string.
+     * @max: the maximum number of bytes to examine. If @max
+     *       is less than 0, then the string is assumed to be
+     *       nul-terminated. If @max is 0, @p will not be examined and
+     *       may be %NULL.
+     *
+     * Returns the length of the string in characters.
+     *
+     * Return value: the length of the string in characters
+     **/
+    static long
+    cc_utf8_strlen (const char * p, int max)
+    {
+      long len = 0;
+      const char *start = p;
+
+      if (!(p != NULL || max == 0))
+      {
+          return 0;
+      }
+
+      if (max < 0)
+        {
+          while (*p)
+	    {
+	      p = cc_utf8_next_char (p);
+	      ++len;
+	    }
+        }
+      else
+        {
+          if (max == 0 || !*p)
+	    return 0;
+
+          p = cc_utf8_next_char (p);
+
+          while (p - start < max && *p)
+	    {
+	      ++len;
+	      p = cc_utf8_next_char (p);
+	    }
+
+          /* only do the last len increment if we got a complete
+           * char (don't count partial chars)
+           */
+          if (p - start == max)
+	    ++len;
+        }
+
+      return len;
+    }
+
+    /*
+     * g_utf8_get_char:
+     * @p: a pointer to Unicode character encoded as UTF-8
+     *
+     * Converts a sequence of bytes encoded as UTF-8 to a Unicode character.
+     * If @p does not point to a valid UTF-8 encoded character, results are
+     * undefined. If you are not sure that the bytes are complete
+     * valid Unicode characters, you should use g_utf8_get_char_validated()
+     * instead.
+     *
+     * Return value: the resulting character
+     **/
+    static unsigned int
+    cc_utf8_get_char (const char * p)
+    {
+      int i, mask = 0, len;
+      unsigned int result;
+      unsigned char c = (unsigned char) *p;
+
+      UTF8_COMPUTE (c, mask, len);
+      if (len == -1)
+        return (unsigned int) - 1;
+      UTF8_GET (result, p, i, mask, len);
+
+      return result;
+    }
+
+
 	void CCLabelBMFont::createFontChars()
 	{
 		int nextFontPositionX = 0;
@@ -446,16 +634,33 @@ namespace cocos2d{
 
         unsigned int quantityOfLines = 1;
 
-		unsigned int stringLen = m_sString.length();
-
-        if (0 == stringLen)
+        if (0 == m_sString.length())
         {
             return;
         }
 
+        int utf8len = cc_utf8_strlen(m_sString.c_str(), -1);
+        if (utf8len == 0)
+        {
+            return;
+        }
+        
+        unsigned short* pUniStr = new unsigned short[utf8len+1];
+        pUniStr[utf8len] = 0;
+
+        const char* p = m_sString.c_str();
+
+        for (int i = 0; i < utf8len; ++i)
+        {
+            pUniStr[i] = cc_utf8_get_char(p);
+            p = cc_utf8_next_char (p);
+        }
+
+        unsigned int stringLen = cc_wcslen(pUniStr);
+
         for (unsigned int i = 0; i < stringLen - 1; ++i)
         {
-            unsigned short c = m_sString[i];
+            unsigned short c = pUniStr[i];
             if (c == '\n')
             {
                 quantityOfLines++;
@@ -467,8 +672,7 @@ namespace cocos2d{
 
 		for (unsigned int i= 0; i < stringLen; i++)
 		{
-			unsigned short c = m_sString[i];
-			CCAssert( c < kCCBMFontMaxChars, "LabelBMFont: character outside bounds");
+			unsigned short c = pUniStr[i];
 
             if (c == '\n')
             {
@@ -476,10 +680,13 @@ namespace cocos2d{
                 nextFontPositionY -= m_pConfiguration->m_uCommonHeight;
                 continue;
             }
+
+            std::map<unsigned int, ccBMFontDef>::iterator it = m_pConfiguration->m_pBitmapFontArray->find(c);
+            CCAssert(it != m_pConfiguration->m_pBitmapFontArray->end(), "LabelBMFont: character is not supported");
             
 			kerningAmount = this->kerningAmountForFirst(prev, c);
 
-			const ccBMFontDef& fontDef = m_pConfiguration->m_pBitmapFontArray[c];
+			const ccBMFontDef& fontDef = (*(m_pConfiguration->m_pBitmapFontArray))[c];
 
 			CCRect rect = fontDef.rect;
 
@@ -503,14 +710,14 @@ namespace cocos2d{
 				fontChar->setOpacity(255);
 			}
 
-            float yOffset = (float) (m_pConfiguration->m_uCommonHeight - fontDef.yOffset);
+            float yOffset = (float)(m_pConfiguration->m_uCommonHeight) - fontDef.yOffset;
 			fontChar->setPositionInPixels( ccp( nextFontPositionX + fontDef.xOffset + fontDef.rect.size.width / 2.0f + kerningAmount,
 				                                (float) nextFontPositionY + yOffset - rect.size.height/2.0f ) );		
 
 			//		NSLog(@"position.y: %f", fontChar.position.y);
 
 			// update kerning
-			nextFontPositionX += m_pConfiguration->m_pBitmapFontArray[c].xAdvance + kerningAmount;
+			nextFontPositionX += (*(m_pConfiguration->m_pBitmapFontArray))[c].xAdvance + kerningAmount;
 			prev = c;
 
 			// Apply label properties
@@ -535,6 +742,8 @@ namespace cocos2d{
         tmpSize.height = (float) totalHeight;
 
 		this->setContentSizeInPixels(tmpSize);
+
+        CC_SAFE_DELETE_ARRAY(pUniStr);
 	}
 
 	//LabelBMFont - CCLabelProtocol protocol
@@ -553,7 +762,8 @@ namespace cocos2d{
                 {
                     pNode->setIsVisible(false);
                 }
-            }		}
+            }
+		}
 		this->createFontChars();
 	}
 
@@ -568,7 +778,7 @@ namespace cocos2d{
     }
 
 	//LabelBMFont - CCRGBAProtocol protocol
-	void CCLabelBMFont::setColor(ccColor3B var)
+	void CCLabelBMFont::setColor(const ccColor3B& var)
 	{
 		m_tColor = var;
 		if (m_pChildren && m_pChildren->count() != 0)
@@ -581,9 +791,10 @@ namespace cocos2d{
                 {
                     pNode->setColor(m_tColor);
                 }
-            }		}
+            }
+		}
 	}
-	ccColor3B CCLabelBMFont::getColor()
+	const ccColor3B& CCLabelBMFont::getColor()
 	{
 		return m_tColor;
 	}
@@ -599,13 +810,14 @@ namespace cocos2d{
                 CCNode* pNode = (CCNode*) child;
                 if (pNode)
                 {
-                    CCRGBAProtocol *pRGBAProtocol = pNode->convertToRGBAProtocol();
+                    CCRGBAProtocol *pRGBAProtocol = dynamic_cast<CCRGBAProtocol*>(pNode);
                     if (pRGBAProtocol)
                     {
                         pRGBAProtocol->setOpacity(m_cOpacity);
                     }
                 }
-            }		}
+            }
+		}
 	}
 	GLubyte CCLabelBMFont::getOpacity()
 	{
@@ -622,13 +834,14 @@ namespace cocos2d{
                 CCNode* pNode = (CCNode*) child;
                 if (pNode)
                 {
-                    CCRGBAProtocol *pRGBAProtocol = pNode->convertToRGBAProtocol();
+                    CCRGBAProtocol *pRGBAProtocol = dynamic_cast<CCRGBAProtocol*>(pNode);
                     if (pRGBAProtocol)
                     {
                         pRGBAProtocol->setIsOpacityModifyRGB(m_bIsOpacityModifyRGB);
                     }
                 }
-            }		}
+            }
+		}
 	}
 	bool CCLabelBMFont::getIsOpacityModifyRGB()
 	{
@@ -636,7 +849,7 @@ namespace cocos2d{
 	}
 
 	// LabelBMFont - AnchorPoint
-	void CCLabelBMFont::setAnchorPoint(CCPoint point)
+	void CCLabelBMFont::setAnchorPoint(const CCPoint& point)
 	{
 		if( ! CCPoint::CCPointEqualToPoint(point, m_tAnchorPoint) )
 		{
@@ -650,7 +863,7 @@ namespace cocos2d{
 	void CCLabelBMFont::draw()
 	{
 		CCSpriteBatchNode::draw();
-		CCSize s = this->getContentSize();
+		const CCSize& s = this->getContentSize();
 		CCPoint vertices[4]={
 			ccp(0,0),ccp(s.width,0),
 			ccp(s.width,s.height),ccp(0,s.height),

@@ -21,6 +21,7 @@
 		655118C513FAC48300A8A20B /* LuaSimpleAudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 655118B913FAC3BD00A8A20B /* LuaSimpleAudioEngine.h */; };
 		655118CD13FAC63F00A8A20B /* effect1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 655118CB13FAC63F00A8A20B /* effect1.wav */; };
 		655118CE13FAC63F00A8A20B /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 655118CC13FAC63F00A8A20B /* background.mp3 */; };
+		AD7C5EBE14751231008E5647 /* CCThread_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = AD7C5EBD14751231008E5647 /* CCThread_ios.mm */; };
 		BF23C0A613B038AB00F32062 /* LuaCocos2d.h in Headers */ = {isa = PBXBuildFile; fileRef = BF23C0A013B038AB00F32062 /* LuaCocos2d.h */; };
 		BF23C0A713B038AB00F32062 /* LuaEngineImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = BF23C0A113B038AB00F32062 /* LuaEngineImpl.h */; };
 		BF23C0A813B038AB00F32062 /* LuaEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = BF23C0A213B038AB00F32062 /* LuaEngine.h */; };
@@ -88,7 +89,6 @@
 		BF82F8E613A8657700616D55 /* ccConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F45C13A8657100616D55 /* ccConfig.h */; };
 		BF82F8E713A8657700616D55 /* ccMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F45D13A8657100616D55 /* ccMacros.h */; };
 		BF82F8E813A8657700616D55 /* ccTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F45E13A8657100616D55 /* ccTypes.h */; };
-		BF82F8E913A8657700616D55 /* selector_protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F45F13A8657100616D55 /* selector_protocol.h */; };
 		BF82F8EA13A8657700616D55 /* CCNode.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F46013A8657100616D55 /* CCNode.h */; };
 		BF82F8EB13A8657700616D55 /* CCMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F46113A8657100616D55 /* CCMenu.h */; };
 		BF82F8EC13A8657700616D55 /* CCRenderTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F46213A8657100616D55 /* CCRenderTexture.h */; };
@@ -207,7 +207,6 @@
 		BF82FB6713A8657800616D55 /* CCSAXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F78F13A8657300616D55 /* CCSAXParser.h */; };
 		BF82FB6813A8657800616D55 /* CCStdC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF82F79013A8657300616D55 /* CCStdC.cpp */; };
 		BF82FB6913A8657800616D55 /* CCStdC.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F79113A8657300616D55 /* CCStdC.h */; };
-		BF82FB6A13A8657800616D55 /* CCThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF82F79213A8657300616D55 /* CCThread.cpp */; };
 		BF82FB6B13A8657800616D55 /* CCThread.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F79313A8657300616D55 /* CCThread.h */; };
 		BF82FB6C13A8657800616D55 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F79413A8657300616D55 /* platform.h */; };
 		BF82FB6D13A8657800616D55 /* CCCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = BF82F79513A8657300616D55 /* CCCommon.h */; };
@@ -285,6 +284,9 @@
 		BF82FCF613A87F1A00616D55 /* tolua_map.c in Sources */ = {isa = PBXBuildFile; fileRef = BF82FCB713A87F1A00616D55 /* tolua_map.c */; };
 		BF82FCF713A87F1A00616D55 /* tolua_push.c in Sources */ = {isa = PBXBuildFile; fileRef = BF82FCB813A87F1A00616D55 /* tolua_push.c */; };
 		BF82FCF813A87F1A00616D55 /* tolua_to.c in Sources */ = {isa = PBXBuildFile; fileRef = BF82FCB913A87F1A00616D55 /* tolua_to.c */; };
+		BF87A2931414CC3B0025E979 /* Cocos2dxLuaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF87A2911414CC3B0025E979 /* Cocos2dxLuaLoader.cpp */; };
+		BF87A2941414CC3B0025E979 /* Cocos2dxLuaLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = BF87A2921414CC3B0025E979 /* Cocos2dxLuaLoader.h */; };
+		BF87A2A21414CCF60025E979 /* hello2.lua in Resources */ = {isa = PBXBuildFile; fileRef = BF87A2A11414CCF60025E979 /* hello2.lua */; };
 		D403B5D9135D1AF1004B518D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D403B5D8135D1AF1004B518D /* libxml2.dylib */; };
 		D463AE1613F572CF00374EAA /* CCTexturePVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D463AE1513F572CF00374EAA /* CCTexturePVR.cpp */; };
 		D4742F4F13F6273F002ED151 /* FontLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = D4742F4413F6273F002ED151 /* FontLabel.h */; };
@@ -364,6 +366,7 @@
 		655118B913FAC3BD00A8A20B /* LuaSimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaSimpleAudioEngine.h; path = CocosDenshion_support/LuaSimpleAudioEngine.h; sourceTree = "<group>"; };
 		655118CB13FAC63F00A8A20B /* effect1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = effect1.wav; sourceTree = "<group>"; };
 		655118CC13FAC63F00A8A20B /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		AD7C5EBD14751231008E5647 /* CCThread_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCThread_ios.mm; sourceTree = "<group>"; };
 		BF23C0A013B038AB00F32062 /* LuaCocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocos2d.h; sourceTree = "<group>"; };
 		BF23C0A113B038AB00F32062 /* LuaEngineImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineImpl.h; sourceTree = "<group>"; };
 		BF23C0A213B038AB00F32062 /* LuaEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngine.h; sourceTree = "<group>"; };
@@ -434,7 +437,6 @@
 		BF82F45C13A8657100616D55 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
 		BF82F45D13A8657100616D55 /* ccMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccMacros.h; sourceTree = "<group>"; };
 		BF82F45E13A8657100616D55 /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
-		BF82F45F13A8657100616D55 /* selector_protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = selector_protocol.h; sourceTree = "<group>"; };
 		BF82F46013A8657100616D55 /* CCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNode.h; sourceTree = "<group>"; };
 		BF82F46113A8657100616D55 /* CCMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenu.h; sourceTree = "<group>"; };
 		BF82F46213A8657100616D55 /* CCRenderTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderTexture.h; sourceTree = "<group>"; };
@@ -554,7 +556,6 @@
 		BF82F78F13A8657300616D55 /* CCSAXParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSAXParser.h; sourceTree = "<group>"; };
 		BF82F79013A8657300616D55 /* CCStdC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCStdC.cpp; sourceTree = "<group>"; };
 		BF82F79113A8657300616D55 /* CCStdC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCStdC.h; sourceTree = "<group>"; };
-		BF82F79213A8657300616D55 /* CCThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCThread.cpp; sourceTree = "<group>"; };
 		BF82F79313A8657300616D55 /* CCThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCThread.h; sourceTree = "<group>"; };
 		BF82F79413A8657300616D55 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
 		BF82F79513A8657300616D55 /* CCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCommon.h; sourceTree = "<group>"; };
@@ -632,6 +633,9 @@
 		BF82FCB713A87F1A00616D55 /* tolua_map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_map.c; sourceTree = "<group>"; };
 		BF82FCB813A87F1A00616D55 /* tolua_push.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_push.c; sourceTree = "<group>"; };
 		BF82FCB913A87F1A00616D55 /* tolua_to.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_to.c; sourceTree = "<group>"; };
+		BF87A2911414CC3B0025E979 /* Cocos2dxLuaLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cocos2dxLuaLoader.cpp; sourceTree = "<group>"; };
+		BF87A2921414CC3B0025E979 /* Cocos2dxLuaLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cocos2dxLuaLoader.h; sourceTree = "<group>"; };
+		BF87A2A11414CCF60025E979 /* hello2.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hello2.lua; sourceTree = "<group>"; };
 		D403B5D8135D1AF1004B518D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		D463AE1513F572CF00374EAA /* CCTexturePVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTexturePVR.cpp; sourceTree = "<group>"; };
 		D4742F4413F6273F002ED151 /* FontLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontLabel.h; sourceTree = "<group>"; };
@@ -826,6 +830,8 @@
 		BF23C09F13B038AB00F32062 /* cocos2dx_support */ = {
 			isa = PBXGroup;
 			children = (
+				BF87A2911414CC3B0025E979 /* Cocos2dxLuaLoader.cpp */,
+				BF87A2921414CC3B0025E979 /* Cocos2dxLuaLoader.h */,
 				BF23C0A013B038AB00F32062 /* LuaCocos2d.h */,
 				BF23C0A113B038AB00F32062 /* LuaEngineImpl.h */,
 				BF23C0A213B038AB00F32062 /* LuaEngine.h */,
@@ -847,6 +853,7 @@
 		BF82F40313A8647B00616D55 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				BF87A2A11414CCF60025E979 /* hello2.lua */,
 				655118CB13FAC63F00A8A20B /* effect1.wav */,
 				655118CC13FAC63F00A8A20B /* background.mp3 */,
 				D4CEAD9313B4770300780515 /* land.png */,
@@ -990,7 +997,6 @@
 				BF82F45C13A8657100616D55 /* ccConfig.h */,
 				BF82F45D13A8657100616D55 /* ccMacros.h */,
 				BF82F45E13A8657100616D55 /* ccTypes.h */,
-				BF82F45F13A8657100616D55 /* selector_protocol.h */,
 				BF82F46013A8657100616D55 /* CCNode.h */,
 				BF82F46113A8657100616D55 /* CCMenu.h */,
 				BF82F46213A8657100616D55 /* CCRenderTexture.h */,
@@ -1129,7 +1135,6 @@
 				BF82F78F13A8657300616D55 /* CCSAXParser.h */,
 				BF82F79013A8657300616D55 /* CCStdC.cpp */,
 				BF82F79113A8657300616D55 /* CCStdC.h */,
-				BF82F79213A8657300616D55 /* CCThread.cpp */,
 				BF82F79313A8657300616D55 /* CCThread.h */,
 				BF82F79413A8657300616D55 /* platform.h */,
 				BF82F79513A8657300616D55 /* CCCommon.h */,
@@ -1146,6 +1151,7 @@
 		BF82F4C913A8657100616D55 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				AD7C5EBD14751231008E5647 /* CCThread_ios.mm */,
 				D4742F4313F6273F002ED151 /* FontLabel */,
 				BF82F4CA13A8657100616D55 /* AccelerometerDelegateWrapper.h */,
 				BF82F4CB13A8657100616D55 /* AccelerometerDelegateWrapper.mm */,
@@ -1501,7 +1507,6 @@
 				BF82F8E613A8657700616D55 /* ccConfig.h in Headers */,
 				BF82F8E713A8657700616D55 /* ccMacros.h in Headers */,
 				BF82F8E813A8657700616D55 /* ccTypes.h in Headers */,
-				BF82F8E913A8657700616D55 /* selector_protocol.h in Headers */,
 				BF82F8EA13A8657700616D55 /* CCNode.h in Headers */,
 				BF82F8EB13A8657700616D55 /* CCMenu.h in Headers */,
 				BF82F8EC13A8657700616D55 /* CCRenderTexture.h in Headers */,
@@ -1625,6 +1630,7 @@
 				D4742F5713F6273F002ED151 /* ZAttributedStringPrivate.h in Headers */,
 				D4742F5813F6273F002ED151 /* ZFont.h in Headers */,
 				655118C513FAC48300A8A20B /* LuaSimpleAudioEngine.h in Headers */,
+				BF87A2941414CC3B0025E979 /* Cocos2dxLuaLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,6 +1713,7 @@
 				D4CEAD9A13B4770400780515 /* crop.png in Resources */,
 				655118CD13FAC63F00A8A20B /* effect1.wav in Resources */,
 				655118CE13FAC63F00A8A20B /* background.mp3 in Resources */,
+				BF87A2A21414CCF60025E979 /* hello2.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1817,7 +1824,6 @@
 				BF82FB6113A8657800616D55 /* CCCommon.cpp in Sources */,
 				BF82FB6413A8657800616D55 /* CCGL.cpp in Sources */,
 				BF82FB6813A8657800616D55 /* CCStdC.cpp in Sources */,
-				BF82FB6A13A8657800616D55 /* CCThread.cpp in Sources */,
 				BF82FB6E13A8657800616D55 /* CCFileUtils.cpp in Sources */,
 				BF82FB7313A8657800616D55 /* CCSAXParser.cpp in Sources */,
 				BF82FB7413A8657800616D55 /* platform.cpp in Sources */,
@@ -1878,6 +1884,8 @@
 				D4742F5613F6273F002ED151 /* ZAttributedString.m in Sources */,
 				D4742F5913F6273F002ED151 /* ZFont.m in Sources */,
 				655118C413FAC48300A8A20B /* LuaSimpleAudioEngine.cpp in Sources */,
+				BF87A2931414CC3B0025E979 /* Cocos2dxLuaLoader.cpp in Sources */,
+				AD7C5EBE14751231008E5647 /* CCThread_ios.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1912,7 +1920,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SDKROOT)/usr/include/libxml2/\"",
@@ -1957,7 +1965,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SDKROOT)/usr/include/libxml2/\"",
@@ -1995,6 +2003,7 @@
 					TARGET_OS_IPHONE,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../cocos2dx",
 					"$(SDKROOT)/usr/include/libxml2",
@@ -2021,6 +2030,7 @@
 					TARGET_OS_IPHONE,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../cocos2dx",
 					"$(SDKROOT)/usr/include/libxml2",
@@ -2050,7 +2060,7 @@
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = NO;
 				"GCC_THUMB_SUPPORT[arch=armv7]" = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
@@ -2072,7 +2082,7 @@
 				"GCC_THUMB_SUPPORT[arch=armv6]" = NO;
 				"GCC_THUMB_SUPPORT[arch=armv7]" = YES;
 				GCC_UNROLL_LOOPS = YES;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;

@@ -42,7 +42,7 @@ static AppDelegate s_sharedApplication;
     viewController.view = __glView;
 
     // Set RootViewController to window
-    window.rootViewController = viewController;
+    [window addSubview: viewController.view];
     [window makeKeyAndVisible];
 
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
@@ -97,6 +97,7 @@ static AppDelegate s_sharedApplication;
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
+     cocos2d::CCDirector::sharedDirector()->purgeCachedData();
 }
 
 

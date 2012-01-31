@@ -33,6 +33,8 @@ Use any of these editors to generate BMFonts:
 #ifndef __CCBITMAP_FONT_ATLAS_H__
 #define __CCBITMAP_FONT_ATLAS_H__
 #include "CCSpriteBatchNode.h"
+#include <map>
+
 namespace cocos2d{
 
 	struct _KerningHashElement;
@@ -69,10 +71,6 @@ namespace cocos2d{
 		int bottom;
 	} ccBMFontPadding;
 
-	enum {
-		// how many characters are supported
-		kCCBMFontMaxChars = 2048, //256,
-	};
 
 	/** @brief CCBMFontConfiguration has parsed configuration of the the .fnt file
 	@since v0.8
@@ -82,7 +80,8 @@ namespace cocos2d{
 		// XXX: Creating a public interface so that the bitmapFontArray[] is accesible
 	public://@public
 		//! The characters building up the font
-		ccBMFontDef	m_pBitmapFontArray[kCCBMFontMaxChars];
+        std::map<unsigned int, ccBMFontDef>* m_pBitmapFontArray;
+
 		//! FNTConfig: Common Height
 		unsigned int m_uCommonHeight;
 		//! Padding
@@ -92,10 +91,7 @@ namespace cocos2d{
 		//! values for kerning
 		struct _KerningHashElement	*m_pKerningDictionary;
 	public:
-		CCBMFontConfiguration()
-			: m_uCommonHeight(0)
-            , m_pKerningDictionary(NULL)
-		{}
+		CCBMFontConfiguration();
 		virtual ~CCBMFontConfiguration();
 		char * description();
 		/** allocates a CCBMFontConfiguration with a FNT file */
@@ -148,7 +144,7 @@ namespace cocos2d{
 		/** conforms to CCRGBAProtocol protocol */
 		CC_PROPERTY(GLubyte, m_cOpacity, Opacity)
 		/** conforms to CCRGBAProtocol protocol */
-		CC_PROPERTY(ccColor3B, m_tColor, Color)
+		CC_PROPERTY_PASS_BY_REF(ccColor3B, m_tColor, Color)
 		/** conforms to CCRGBAProtocol protocol */
 		CC_PROPERTY(bool, m_bIsOpacityModifyRGB, IsOpacityModifyRGB)
 	protected:
@@ -179,9 +175,8 @@ namespace cocos2d{
 		virtual void setString(const char *label);
 		virtual const char* getString(void);
         virtual void setCString(const char *label);
-		virtual void setAnchorPoint(CCPoint var);
-		virtual CCRGBAProtocol* convertToRGBAProtocol() { return (CCRGBAProtocol*)this; }
-		virtual CCLabelProtocol* convertToLabelProtocol() { return (CCLabelProtocol*)this; }
+		virtual void setAnchorPoint(const CCPoint& var);
+
 #if CC_LABELBMFONT_DEBUG_DRAW
 		virtual void draw();
 #endif // CC_LABELBMFONT_DEBUG_DRAW

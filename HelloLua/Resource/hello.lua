@@ -1,3 +1,7 @@
+require "hello2"
+
+cocos2d.CCLuaLog("result is " .. myadd(3, 5))
+
 -- create scene & layer
 layerFarm = cocos2d.CCLayer:node()
 layerFarm:setIsTouchEnabled(true)
@@ -31,6 +35,7 @@ function btnTouchMove(e)
 end
 
 function btnTouchBegin(e)
+    cocos2d.CCScheduler:sharedScheduler():unscheduleScriptFunc("tick")
     cocos2d.CCLuaLog("btnTouchBegin")
     for k,v in ipairs(e) do
         pointBegin = v:locationInView(v:view())
@@ -88,17 +93,13 @@ spriteDog:setPosition(cocos2d.CCPoint(0, winSize.height/4*3))
 layerFarm:addChild(spriteDog)
 
 animation = cocos2d.CCAnimation:animation()
-animation:addFrame(frame0)
-animation:addFrame(frame1)
-animation:setDelay(0.5)
-animation:setName('wait')
---[[
+
 animFrames = cocos2d.CCMutableArray_CCSpriteFrame__:new(2)
 animFrames:addObject(frame0)
 animFrames:addObject(frame1)
---animation = cocos2d.CCAnimation:animationWithName("wait", 0.5, animFrames)
+
 animation = cocos2d.CCAnimation:animationWithFrames(animFrames,0.5)
---]]
+
 animate = cocos2d.CCAnimate:actionWithAnimation(animation, false);
 spriteDog:runAction(cocos2d.CCRepeatForever:actionWithAction(animate))
 
@@ -138,7 +139,7 @@ layerMenu:addChild(menuTools)
 
 function tick()
 
-    point = spriteDog:getPosition();
+    local point = spriteDog:getPosition();
 
     if point.x > winSize.width then
         point.x = 0
@@ -149,6 +150,11 @@ function tick()
     end
 
 end
+
+-- avoid memory leak
+collectgarbage( "setpause", 100) 
+collectgarbage( "setstepmul", 5000)
+
 
 cocos2d.CCScheduler:sharedScheduler():scheduleScriptFunc("tick", 0.01, false)
 

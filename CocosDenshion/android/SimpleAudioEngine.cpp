@@ -61,7 +61,7 @@ namespace CocosDenshion
 
     void SimpleAudioEngine::preloadBackgroundMusic(const char* pszFilePath)
 	{
-
+        preloadBackgroundMusicJNI(pszFilePath);
 	}
 
 	void SimpleAudioEngine::playBackgroundMusic(const char* pszFilePath, bool bLoop)
@@ -137,5 +137,30 @@ namespace CocosDenshion
 	void SimpleAudioEngine::unloadEffect(const char* pszFilePath)
 	{
 		unloadEffectJNI(pszFilePath);
+	}
+
+	void SimpleAudioEngine::pauseEffect(unsigned int nSoundId)
+	{
+		pauseEffectJNI(nSoundId);
+	}
+
+	void SimpleAudioEngine::pauseAllEffects()
+	{
+		pauseAllEffectsJNI();
+	}
+
+	void SimpleAudioEngine::resumeEffect(unsigned int nSoundId)
+	{
+		resumeEffectJNI(nSoundId);
+	}
+
+	void SimpleAudioEngine::resumeAllEffects()
+	{
+		resumeAllEffectsJNI();
+	}
+
+	void SimpleAudioEngine::stopAllEffects()
+	{
+		stopAllEffectsJNI();
 	}
 }

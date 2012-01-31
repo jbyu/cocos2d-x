@@ -5,6 +5,8 @@
 // android effect only support ogg
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	#define EFFECT_FILE		"effect2.ogg"
+#elif( CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+	#define EFFECT_FILE		"effect1.raw"
 #else
 	#define EFFECT_FILE		"effect1.wav"
 #endif // CC_PLATFORM_ANDROID
@@ -39,7 +41,12 @@ m_nSoundId(0)
 		"add background music volume",
 		"sub background music volume",
 		"add effects volume",
-		"sub effects volume"
+		"sub effects volume",
+		"pause effect",
+		"resume effect",
+		"pause all effects",
+		"resume all effects",
+		"stop all effects"
 	};
 
 	// add menu items for tests
@@ -49,11 +56,11 @@ m_nSoundId(0)
 
 	for (int i = 0; i < m_nTestCount; ++i)
 	{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_AIRPLAY)
-		CCLabelBMFont* label = CCLabelBMFont::bitmapFontAtlasWithString(testItems[i].c_str(),  "fonts/arial16.fnt");
-#else
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+//		CCLabelBMFont* label = CCLabelBMFont::labelWithString(testItems[i].c_str(),  "fonts/arial16.fnt");
+//#else
         CCLabelTTF* label = CCLabelTTF::labelWithString(testItems[i].c_str(), "Arial", 24);
-#endif		
+//#endif		
         CCMenuItemLabel* pMenuItem = CCMenuItemLabel::itemWithLabel(label, this, menu_selector(CocosDenshionTest::menuCallback));
 		
 		m_pItmeMenu->addChild(pMenuItem, i + 10000);
@@ -67,8 +74,8 @@ m_nSoundId(0)
 	setIsTouchEnabled(true);
 
 	// preload background music and effect
-	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic(MUSIC_FILE);
-	SimpleAudioEngine::sharedEngine()->preloadEffect(EFFECT_FILE);
+	SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic( CCFileUtils::fullPathFromRelativePath(MUSIC_FILE) );
+	SimpleAudioEngine::sharedEngine()->preloadEffect( CCFileUtils::fullPathFromRelativePath(EFFECT_FILE) );
     
     // set default volume
     SimpleAudioEngine::sharedEngine()->setEffectsVolume(0.5);
@@ -96,7 +103,8 @@ void CocosDenshionTest::menuCallback(CCObject * pSender)
 	{
 	// play background music
 	case 0:
-		SimpleAudioEngine::sharedEngine()->playBackgroundMusic(MUSIC_FILE, true);
+
+		SimpleAudioEngine::sharedEngine()->playBackgroundMusic(std::string(CCFileUtils::fullPathFromRelativePath(MUSIC_FILE)).c_str(), true);
 		break;
 	// stop background music
 	case 1:
@@ -127,11 +135,11 @@ void CocosDenshionTest::menuCallback(CCObject * pSender)
 		break;
 	// play effect
 	case 6:
-		m_nSoundId = SimpleAudioEngine::sharedEngine()->playEffect(EFFECT_FILE);	
+		m_nSoundId = SimpleAudioEngine::sharedEngine()->playEffect(std::string(CCFileUtils::fullPathFromRelativePath(EFFECT_FILE)).c_str());
 		break;
     // play effect
     case 7:
-        m_nSoundId = SimpleAudioEngine::sharedEngine()->playEffect(EFFECT_FILE, true);	
+        m_nSoundId = SimpleAudioEngine::sharedEngine()->playEffect(std::string(CCFileUtils::fullPathFromRelativePath(EFFECT_FILE)).c_str(), true);
         break;
     // stop effect
 	case 8:
@@ -139,23 +147,38 @@ void CocosDenshionTest::menuCallback(CCObject * pSender)
 		break;
 	// unload effect
 	case 9:
-		SimpleAudioEngine::sharedEngine()->unloadEffect(EFFECT_FILE);
+		SimpleAudioEngine::sharedEngine()->unloadEffect(std::string(CCFileUtils::fullPathFromRelativePath(EFFECT_FILE)).c_str());
 		break;
 		// add bakcground music volume
 	case 10:
-		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() + 0.1);
+		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() + 0.1f);
 		break;
 		// sub backgroud music volume
 	case 11:
-		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() - 0.1);
+		SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume() - 0.1f);
 		break;
 		// add effects volume
 	case 12:
-		SimpleAudioEngine::sharedEngine()->setEffectsVolume(SimpleAudioEngine::sharedEngine()->getEffectsVolume() + 0.1);
+		SimpleAudioEngine::sharedEngine()->setEffectsVolume(SimpleAudioEngine::sharedEngine()->getEffectsVolume() + 0.1f);
 		break;
 		// sub effects volume
 	case 13:
-		SimpleAudioEngine::sharedEngine()->setEffectsVolume(SimpleAudioEngine::sharedEngine()->getEffectsVolume() - 0.1);
+		SimpleAudioEngine::sharedEngine()->setEffectsVolume(SimpleAudioEngine::sharedEngine()->getEffectsVolume() - 0.1f);
+		break;
+	case 14:
+		SimpleAudioEngine::sharedEngine()->pauseEffect(m_nSoundId);
+		break;
+	case 15:
+		SimpleAudioEngine::sharedEngine()->resumeEffect(m_nSoundId);
+		break;
+	case 16:
+		SimpleAudioEngine::sharedEngine()->pauseAllEffects();
+		break;
+	case 17:
+		SimpleAudioEngine::sharedEngine()->resumeAllEffects();
+		break;
+	case 18:
+		SimpleAudioEngine::sharedEngine()->stopAllEffects();
 		break;
 	}
 	
