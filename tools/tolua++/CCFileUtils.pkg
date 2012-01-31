@@ -2,7 +2,9 @@ namespace cocos2d {
 
 class  CCFileUtils
 {
-    static const char* fullPathFromRelativePath(const char *pszRelativePath);
+	static unsigned char* getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize);
+    static unsigned char* getFileDataFromZip(const char* pszZipFilePath, const char* pszFileName, unsigned long * pSize);
+	static const char* fullPathFromRelativePath(const char *pszRelativePath);
 };
 
 }

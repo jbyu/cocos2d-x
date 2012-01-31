@@ -1,7 +1,6 @@
+#define CCSpriteIndexNotInitialized 0xffffffff
 
 namespace   cocos2d {
-
-#define CCSpriteIndexNotInitialized 0xffffffff
 
 typedef enum {
 	//! Translate with it's parent

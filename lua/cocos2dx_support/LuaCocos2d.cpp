@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 01/31/12 14:44:49.
+** Generated automatically by tolua++-1.0.92 on 01/31/12 18:30:29.
 */
 
 #ifndef __cplusplus
@@ -13,6 +13,7 @@
 /* Exported function */
 TOLUA_API int  tolua_Cocos2d_open (lua_State* tolua_S);
 
+#include "LuaCocos2d.h"
 using namespace cocos2d;
 
 /* function to release collected object via destructor */
@@ -71185,6 +71186,76 @@ static int tolua_Cocos2d_cocos2d_CCParticleRain_node00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getFileData of class  cocos2d::CCFileUtils */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_cocos2d_CCFileUtils_getFileData00
+static int tolua_Cocos2d_cocos2d_CCFileUtils_getFileData00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"cocos2d::CCFileUtils",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const char* pszFileName = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* pszMode = ((const char*)  tolua_tostring(tolua_S,3,0));
+  unsigned long pSize = ((unsigned long)  tolua_tonumber(tolua_S,4,0));
+  {
+   unsigned char* tolua_ret = (unsigned char*)  cocos2d::CCFileUtils::getFileData(pszFileName,pszMode,&pSize);
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+   tolua_pushnumber(tolua_S,(lua_Number)pSize);
+  }
+ }
+ return 2;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getFileData'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getFileDataFromZip of class  cocos2d::CCFileUtils */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_cocos2d_CCFileUtils_getFileDataFromZip00
+static int tolua_Cocos2d_cocos2d_CCFileUtils_getFileDataFromZip00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"cocos2d::CCFileUtils",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const char* pszZipFilePath = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* pszFileName = ((const char*)  tolua_tostring(tolua_S,3,0));
+  unsigned long pSize = ((unsigned long)  tolua_tonumber(tolua_S,4,0));
+  {
+   unsigned char* tolua_ret = (unsigned char*)  cocos2d::CCFileUtils::getFileDataFromZip(pszZipFilePath,pszFileName,&pSize);
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+   tolua_pushnumber(tolua_S,(lua_Number)pSize);
+  }
+ }
+ return 2;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getFileDataFromZip'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: fullPathFromRelativePath of class  cocos2d::CCFileUtils */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_cocos2d_CCFileUtils_fullPathFromRelativePath00
 static int tolua_Cocos2d_cocos2d_CCFileUtils_fullPathFromRelativePath00(lua_State* tolua_S)
@@ -71563,9 +71634,9 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
     tolua_function(tolua_S,"purgeSharedScheduler",tolua_Cocos2d_cocos2d_CCScheduler_purgeSharedScheduler00);
    tolua_endmodule(tolua_S);
   tolua_endmodule(tolua_S);
+  tolua_constant(tolua_S,"CCSpriteIndexNotInitialized",CCSpriteIndexNotInitialized);
   tolua_module(tolua_S,"cocos2d",0);
   tolua_beginmodule(tolua_S,"cocos2d");
-   tolua_constant(tolua_S,"CCSpriteIndexNotInitialized",CCSpriteIndexNotInitialized);
    tolua_constant(tolua_S,"CC_HONOR_PARENT_TRANSFORM_TRANSLATE",cocos2d::CC_HONOR_PARENT_TRANSFORM_TRANSLATE);
    tolua_constant(tolua_S,"CC_HONOR_PARENT_TRANSFORM_ROTATE",cocos2d::CC_HONOR_PARENT_TRANSFORM_ROTATE);
    tolua_constant(tolua_S,"CC_HONOR_PARENT_TRANSFORM_SCALE",cocos2d::CC_HONOR_PARENT_TRANSFORM_SCALE);
@@ -75121,6 +75192,8 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"cocos2d");
    tolua_cclass(tolua_S,"CCFileUtils","cocos2d::CCFileUtils","",NULL);
    tolua_beginmodule(tolua_S,"CCFileUtils");
+    tolua_function(tolua_S,"getFileData",tolua_Cocos2d_cocos2d_CCFileUtils_getFileData00);
+    tolua_function(tolua_S,"getFileDataFromZip",tolua_Cocos2d_cocos2d_CCFileUtils_getFileDataFromZip00);
     tolua_function(tolua_S,"fullPathFromRelativePath",tolua_Cocos2d_cocos2d_CCFileUtils_fullPathFromRelativePath00);
    tolua_endmodule(tolua_S);
   tolua_endmodule(tolua_S);

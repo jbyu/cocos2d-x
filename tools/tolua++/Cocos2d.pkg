@@ -1,3 +1,4 @@
+$#include "LuaCocos2d.h"
 $using namespace cocos2d;
 
 $pfile "CCNode.pkg"
