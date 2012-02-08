@@ -173,6 +173,8 @@ CCTextureCache::~CCTextureCache()
 	CCLOGINFO("cocos2d: deallocing CCTextureCache.");
 
 	CC_SAFE_RELEASE(m_pTextures);
+	CC_SAFE_DELETE(s_pAsyncStructQueue);
+	CC_SAFE_DELETE(s_pImageQueue);
 }
 
 void CCTextureCache::purgeSharedTextureCache()
