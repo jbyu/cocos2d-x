@@ -383,7 +383,6 @@ public:
 public:
 	/** returns a shared instance of the director */
 	static CCDirector* sharedDirector(void);
-	void resetDirector();
 
 	void resetDirector();
 

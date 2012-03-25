@@ -835,6 +835,10 @@
 				Name="win32"
 				>
 				<File
+					RelativePath="..\platform\win32\CCAccelerometer_win32.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\platform\win32\CCAccelerometer_win32.h"
 					>
 				</File>
@@ -1077,6 +1081,18 @@
 			>
 			<File
 				RelativePath="..\script_support\CCScriptSupport.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="extensions"
+			>
+			<File
+				RelativePath="..\extensions\CCNotificationCenter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\extensions\CCNotificationCenter.h"
 				>
 			</File>
 		</Filter>
